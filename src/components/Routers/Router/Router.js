@@ -6,6 +6,8 @@ import Home from "../../Pages/Home/Home";
 import Media from "../../Pages/Media/Media";
 import Message from "../../Pages/Message/Message";
 import Profile from "../../Pages/Profile/Profile";
+import SignIn from "../../Pages/SignInUp/SignIn";
+import SignUp from "../../Pages/SignInUp/SignUp";
 
 const router = createBrowserRouter([
     //homepage route-------
@@ -18,6 +20,9 @@ const router = createBrowserRouter([
             { path: "/profile", element: <Profile /> },
         ],
     },
+    // sign In - Sign Up route ---
+    { path: "/signin", element: <SignIn /> },
+    { path: "/signup", element: <SignUp /> },
 ]);
 
 export default router;

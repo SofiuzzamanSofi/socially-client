@@ -6,7 +6,9 @@ This site is basically a: Social Site
 site Type: Client Side
 #
 
-Project Live site link: [socially113.web.app](https://socially113.web.app).
+Project Live site link:                 [socially113.web.app](https://socially113.web.app).
+
+Project Server (Backend) site link:     [server-live](https://socially-server-sofiuzzamansofi.vercel.app/).
 
 
 
