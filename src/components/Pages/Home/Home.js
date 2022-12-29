@@ -1,10 +1,12 @@
 import React from 'react';
+import AddPost from '../AddPost/AddPost';
+import Posts from '../Posts/Posts';
 
 const Home = () => {
     return (
         <div>
-            This is home .js
-            https://socially113.web.app
+            <AddPost />
+            <Posts />
         </div>
     );
 };

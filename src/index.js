@@ -5,6 +5,8 @@ import router from './components/Routers/Router/Router';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from '../src/components/context/AuthProvider';
+// react phot view----
+import 'react-photo-view/dist/react-photo-view.css';
 // react hot toast ---
 import { Toaster } from 'react-hot-toast';
 // react-query / tanstack-query---
@@ -16,11 +18,10 @@ root.render(
   <React.StrictMode>
     <AuthProvider>
       <Toaster />
-      <QueryClientProvider client={queryClient} />
-      <RouterProvider router={router} />
-
+      <QueryClientProvider client={queryClient} >
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
-
   </React.StrictMode>
 );
 
