@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 const MediaCard = ({ post }) => {
     return (
-        <div className='border min-w-[320px] p-4 grid gap-4 rounded-md dark:text-white bg-slate-50 dark:bg-slate-800 shadow-md relative'>
+        <div className='border min-w-[320px] p-4 grid gap-4 rounded-md dark:text-white bg-slate-50 dark:bg-slate-800 shadow-2xl relative'>
 
             <div className='flex justify-between items-center'>
                 <p> post by:</p>
@@ -23,12 +23,12 @@ const MediaCard = ({ post }) => {
             <h1>{post?.postTitle}</h1>
             <PhotoProvider>
                 <PhotoView src={post?.postImage} >
-                    <img src={post?.postImage} alt="" className='cursor-pointer' title='click to full view' />
+                    <img src={post?.postImage?.toString()} alt="" className='cursor-pointer' title='click to full view' />
                 </PhotoView>
             </PhotoProvider>
-            <p className='mb-20'>{post?.postDetails}</p>
-
-
+            <p className='mb-20'>
+                {post?.postDetails?.length > 50 ? post?.postDetails?.slice(0, 50) + ('...') : post?.postDetails}
+            </p>
 
             {/* like commnet section -- */}
             <div className='p-5 border-y-[1px] flex justify-between items-center h-16 absolute bottom-5 left-0 right-0 mt-96'>
