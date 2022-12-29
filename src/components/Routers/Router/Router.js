@@ -9,6 +9,7 @@ import Message from "../../Pages/Message/Message";
 import Profile from "../../Pages/Profile/Profile";
 import SignIn from "../../Pages/SignInUp/SignIn";
 import SignUp from "../../Pages/SignInUp/SignUp";
+import PrivetRoute from "../PrivetRoute/PrivetRoute";
 
 const router = createBrowserRouter([
     //homepage route-------
@@ -16,10 +17,10 @@ const router = createBrowserRouter([
         path: "/", element: <MainLayout />, errorElement: <ErrorPage />, children: [
             { path: "/", element: <Home /> },
             { path: "/media", element: <Media /> },
-            { path: "/post/:id", element: <MediaDetails />, loader: ({ params }) => fetch(`http://localhost:5000/post/${params?.id}`) },
+            { path: "/post/:id", element: <PrivetRoute><MediaDetails /></PrivetRoute>, loader: ({ params }) => fetch(`http://localhost:5000/post/${params?.id}`) },
             { path: "/message", element: <Message /> },
             { path: "/about", element: <About /> },
-            { path: "/profile", element: <Profile /> },
+            { path: "/profile", element: <PrivetRoute><Profile /></PrivetRoute> },
         ],
     },
     // sign In - Sign Up route ---
