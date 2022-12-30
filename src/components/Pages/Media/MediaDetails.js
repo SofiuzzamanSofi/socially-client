@@ -102,7 +102,7 @@ const MediaDetails = () => {
 
                 {/* show like and comments count number ------ */}
                 <div className=' flex justify-between px-4'>
-                    {post?.likes && post?.likes?.length ? <p className='flex gap-2'><BiLike className='bg-sky-500 w-6 h-6 rounded-full' />{post?.likes?.length}</p> : <p></p>}
+                    {post?.likes && post?.likes?.length ? <p className='flex gap-2'><BiLike className='bg-sky-500 w-6 h-6 rounded-full text-white p-[1px]' />{post?.likes?.length}</p> : <p></p>}
 
                     {post?.comments && <p>{post?.comments?.length} comments</p>}
                 </div>
