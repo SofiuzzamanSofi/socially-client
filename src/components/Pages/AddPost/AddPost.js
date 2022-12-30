@@ -92,7 +92,7 @@ const AddPost = () => {
         }
     }, [imgUrlFromImgbb]);
 
-    console.log("imag under useEfferct:", imgUrlFromImgbb)
+    // console.log("imag under useEfferct:", imgUrlFromImgbb)
 
     return (
         <div className='py-5'>

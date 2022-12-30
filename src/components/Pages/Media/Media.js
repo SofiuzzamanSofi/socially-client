@@ -18,7 +18,7 @@ const Media = () => {
         }
     });
 
-    console.log(data);
+    // console.log(data);
 
 
 
