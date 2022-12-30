@@ -31,6 +31,9 @@ const SignUp = () => {
 
         // host image on imgbb --
         const image = data.image[0];
+        if (!image) {
+            return toast.error("Image is must and required")
+        }
         // IMAGE BB HOT KEY --
         const imageHostingKey = process.env.REACT_APP_imgbb_key_ElonDahkaEmail;
         const formData = new FormData();

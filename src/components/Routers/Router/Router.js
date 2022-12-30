@@ -17,7 +17,8 @@ const router = createBrowserRouter([
         path: "/", element: <MainLayout />, errorElement: <ErrorPage />, children: [
             { path: "/", element: <Home /> },
             { path: "/media", element: <Media /> },
-            { path: "/post/:id", element: <PrivetRoute><MediaDetails /></PrivetRoute>, loader: ({ params }) => fetch(`http://localhost:5000/post/${params?.id}`) },
+            // { path: "/post/:id", element: <PrivetRoute><MediaDetails /></PrivetRoute>, loader: ({ params }) => fetch(`https://socially-server-sofiuzzamansofi.vercel.app/post/${params?.id}`) },
+            { path: "/post/:id", element: <PrivetRoute><MediaDetails /></PrivetRoute> },
             { path: "/message", element: <Message /> },
             { path: "/about", element: <About /> },
             { path: "/profile", element: <PrivetRoute><Profile /></PrivetRoute> },

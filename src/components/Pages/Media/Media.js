@@ -10,7 +10,7 @@ const Media = () => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["post"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/post");
+            const res = await fetch("https://socially-server-sofiuzzamansofi.vercel.app/post");
             const data = await res.json();
             if (data?.success) {
                 return data?.data;
@@ -29,7 +29,7 @@ const Media = () => {
                 <p className='text-xs md:text-sm'>Feel free to like and share and comment.</p>
             </div>
             <div className='py-5 grid gap-5 md:grid-cols-2'>
-                {data && data?.map((post, index) => <MediaCard key={index} post={post} />)}
+                {data && data?.map((post, index) => <MediaCard key={index} post={post} refetch={refetch} />)}
 
             </div>
         </div>

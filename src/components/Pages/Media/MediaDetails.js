@@ -1,21 +1,43 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import noImgFound from "../../assets/noImgFound.png"
 import { BiLike, BiComment, BiShare } from "react-icons/bi";
 import { FaShare, FaRegShareSquare } from 'react-icons/fa';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
 
 
 const MediaDetails = () => {
 
-    const { data: post } = useLoaderData();
-    // console.log(post);
+    const [post, setPost] = useState();
+    const [likeCommentRender, setLikeCommentRender] = useState(false);
+    // const { data: post } = useLoaderData();
+    // console.log("postttts", post?.comments);
+    // console.log("postttts", post?.comments[2]?.commentText);
     const { user } = useContext(AuthContext);
     // console.log(user)
 
+
+
+
+    const location = useLocation();
+    // console.log(location?.pathname)
+    const postId = location?.pathname?.replace("/post/", "")
+    useEffect(() => {
+
+        axios(`https://socially-server-sofiuzzamansofi.vercel.app/post/${postId}`)
+            .then(data => {
+                setPost(data?.data?.data)
+            })
+
+    }, [postId, likeCommentRender]);
+
+
+
+    // add commets functions---
     const handleAddcomment = (event) => {
         event.preventDefault();
         const commentText = event.target?.commentText?.value;
@@ -25,14 +47,32 @@ const MediaDetails = () => {
             commenterPhotoURL: user?.photoURL,
             commentText: commentText,
         };
-        console.log(comment);
-        axios.put(`http://localhost:5000/post/${post?._id}`, comment)
+        // console.log(comment);
+        axios.put(`https://socially-server-sofiuzzamansofi.vercel.app/post/comments/${post?._id}`, comment)
             .then(data => {
+                // console.log("comments axios success:", data?.data);
+                setLikeCommentRender(!likeCommentRender);
                 toast.success(`Dear ${user?.displayName}, your comment is added successfully.`);
             })
             .catch(error => console.log("error from comment add axios catch:", error));
     };
 
+    // add like functions ----
+    const handleADdLike = () => {
+        const like = {
+            likerDisplayName: user?.displayName,
+            likerEmail: user?.email,
+            likerPhotoURL: user?.photoURL,
+        };
+        // console.log(like);
+        axios.put(`https://socially-server-sofiuzzamansofi.vercel.app/post/likes/${post?._id}`, like)
+            .then(data => {
+                // console.log("like axios success:", data?.data);
+                setLikeCommentRender(!likeCommentRender);
+                toast.success(`Dear ${user?.displayName}, your like is added successfully.`);
+            })
+            .catch(error => console.log("error from comment add axios catch:", error));
+    }
 
 
     return (
@@ -59,11 +99,20 @@ const MediaDetails = () => {
                 </div>
 
 
+                {/* show like and comments count number ------ */}
+                <div className=' flex justify-between px-4'>
+                    {post?.likes && post?.likes?.length ? <p className='flex gap-2'><BiLike className='bg-sky-500 w-6 h-6 rounded-full' />{post?.likes?.length}</p> : <p></p>}
 
-                {/* like commnet section -- */}
+                    {post?.comments && <p>{post?.comments?.length} comments</p>}
+                </div>
+
+
+                {/* like comments share add section -- */}
                 {/* <div className='p-5 border-y-[1px] flex justify-between items-center h-16 absolute bottom-5 left-0 right-0 mt-96'> */}
                 <div className='p-5 border-y-[1px] flex justify-between items-center h-16'>
-                    <BiLike className='h-8 w-8 hover:text-[#046380] cursor-pointer' />
+                    <BiLike className='h-8 w-8 hover:text-[#046380] cursor-pointer'
+                        onClick={handleADdLike}
+                    />
                     <BiComment className='h-8 w-8 hover:text-[#046380] cursor-pointer' />
                     <BiShare className='h-8 w-8 rotate-180 hover:text-[#046380] cursor-pointer' />
                     <Link
@@ -85,18 +134,24 @@ const MediaDetails = () => {
                             />
                         </form>
                     </div>
-                    <div>
-                        <div className='flex gap-4 items-center'>
+
+
+
+
+                    {/* show all comments section --- */}   {/* used flex reversed to short --- */}
+                    <div className='flex flex-col-reverse gap-4'>
+                        {post?.comments && post?.comments.map((comment, index) => <div key={index} className='flex gap-4 items-center'>
                             <PhotoProvider>
-                                <PhotoView src={post?.postOwnerPhoto ? post?.postOwnerPhoto : noImgFound} >
-                                    <img src={post?.postOwnerPhoto ? post?.postOwnerPhoto : noImgFound} alt="" className='cursor-pointer w-10 md:w-16 rounded-full border border-[#046380]' title='click to full view' />
+                                <PhotoView src={comment?.commenterPhotoURL ? comment?.commenterPhotoURL : noImgFound} >
+                                    <img src={comment?.commenterPhotoURL ? comment?.commenterPhotoURL : noImgFound} alt="" className='cursor-pointer w-10 md:w-16 rounded-full border border-[#046380]' title='click to full view' />
                                 </PhotoView>
                             </PhotoProvider>
                             <div>
-                                <p>{post?.postOwnerName}</p>
-                                <p>post?.postOwnerName comments</p>
+                                <p>{comment?.commenterDisplayName}</p>
+                                <p>{comment?.commentText}</p>
                             </div>
-                        </div>
+                        </div>)}
+
                     </div>
                 </div>
 

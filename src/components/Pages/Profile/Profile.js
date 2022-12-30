@@ -21,7 +21,7 @@ const Profile = () => {
     const { data, isLoading, refetch } = useQuery({
         queryKey: ["email"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/user?email=${user?.email}`);
+            const res = await fetch(`https://socially-server-sofiuzzamansofi.vercel.app/user?email=${user?.email}`);
             const data = await res.json();
             if (data?.success) {
                 return data?.data;
@@ -54,7 +54,7 @@ const Profile = () => {
         };
         updateUser(userInfo)
             .then(() => {
-                axios.put(`http://localhost:5000/user?email=${user?.email}`, modalEditedData)
+                axios.put(`https://socially-server-sofiuzzamansofi.vercel.app/user?email=${user?.email}`, modalEditedData)
                     .then(data => {
                         toast.success(`Dear ${user?.displayName}, your info is edited successfully.`);
                         refetch();

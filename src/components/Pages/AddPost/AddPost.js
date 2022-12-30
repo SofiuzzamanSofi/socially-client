@@ -79,9 +79,12 @@ const AddPost = () => {
                 postTitle: titleDetails?.title,
                 postDetails: titleDetails?.details,
                 postImage: imgUrlFromImgbb === "noImg" ? "" : imgUrlFromImgbb,
+                comments: [],
+                like: [],
+                share: [],
             };
             console.log("posttt", post);
-            axios.post("http://localhost:5000/post", post)
+            axios.post("https://socially-server-sofiuzzamansofi.vercel.app/post", post)
                 .then(data => {
                     const axiosData = data?.data;
                     if (axiosData?.data?.acknowledged) {
