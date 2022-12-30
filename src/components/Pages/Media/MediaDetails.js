@@ -114,7 +114,7 @@ const MediaDetails = () => {
                     <BiLike className='h-8 w-8 hover:text-[#046380] cursor-pointer'
                         onClick={handleADdLike}
                     />
-                    <BiComment className='h-8 w-8 hover:text-[#046380] cursor-pointer' />
+                    <a href="#comments"><BiComment className='h-8 w-8 hover:text-[#046380] cursor-pointer' /></a>
                     <BiShare className='h-8 w-8 rotate-180 hover:text-[#046380] cursor-pointer' />
                     <Link
                         to="/media"
@@ -130,7 +130,7 @@ const MediaDetails = () => {
                             onSubmit={handleAddcomment}
                         >
                             <input
-                                type="text" placeholder='write your comments' name='commentText'
+                                type="text" placeholder='write your comments' name='commentText' id="comments"
                                 className='p-4 rounded-md border border-black w-full'
                             />
                         </form>
