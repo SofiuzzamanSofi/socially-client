@@ -53,6 +53,7 @@ const MediaDetails = () => {
                 // console.log("comments axios success:", data?.data);
                 setLikeCommentRender(!likeCommentRender);
                 toast.success(`Dear ${user?.displayName}, your comment is added successfully.`);
+                event?.target?.reset();
             })
             .catch(error => console.log("error from comment add axios catch:", error));
     };

@@ -90,7 +90,7 @@ const Profile = () => {
                     <div className=' flex items-center justify-center'>
                         <PhotoProvider>
                             <PhotoView src={user?.photoURL ? user?.photoURL : noImgFound} >
-                                <img src={user?.photoURL ? user?.photoURL : noImgFound} alt="" className='cursor-pointer w-full max-w-[500px] rounded-full' title='click to view full page' />
+                                <img src={user?.photoURL ? user?.photoURL : noImgFound} alt="" className='cursor-pointer w-full max-w-[200px] rounded-full' title='click to view full page' />
                             </PhotoView>
                         </PhotoProvider>
                     </div>
